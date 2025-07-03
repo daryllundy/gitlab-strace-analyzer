@@ -1,0 +1,23 @@
+execve("/usr/bin/curl", ["curl", "https://gitlab.example.com/api/v4/projects"], 0x7fff5fbff5a8 /* 67 vars */) = 0
+brk(NULL)                               = 0x55555556a000
+access("/etc/ld.so.nohwcap", F_OK)     = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=111593, ...}) = 0
+close(3)                                = 0
+socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr("192.168.1.100")}, 16) = -1 EINPROGRESS (Operation now in progress)
+poll([{fd=3, events=POLLOUT}], 1, 60000) = 0 (Timeout)
+close(3)                                = 0
+write(2, "curl: (28) Connection timed out after 60001 milliseconds\n", 58) = 58
+socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr("192.168.1.100")}, 16) = -1 ETIMEDOUT (Connection timed out)
+close(3)                                = 0
+socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(22), sin_addr=inet_addr("192.168.1.100")}, 16) = 0
+send(3, "SSH-2.0-OpenSSH_8.2\r\n", 21, 0) = 21
+recv(3, "", 1024, 0)                    = -1 EAGAIN (Resource temporarily unavailable)
+poll([{fd=3, events=POLLIN}], 1, 10000) = 0 (Timeout)
+close(3)                                = 0
+write(2, "ssh: connect to host 192.168.1.100 port 22: Connection timed out\n", 66) = 66
+exit_group(255)                         = ?
++++ exited with 255 +++

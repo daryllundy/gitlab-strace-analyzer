@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bundle install)",
+      "Bash(mkdir:*)",
+      "Bash(./bin/gitlab-strace-analyzer analyze:*)",
+      "Bash(ls:*)",
+      "Bash(gem install:*)",
+      "Bash(bundle install:*)",
+      "Bash(bundle exec:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

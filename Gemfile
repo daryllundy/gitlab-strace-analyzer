@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'colorize'
-gem 'optparse'
 gem 'json'
+gem 'optparse'
 
 group :development, :test do
   gem 'rspec'

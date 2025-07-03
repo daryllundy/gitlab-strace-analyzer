@@ -1,0 +1,33 @@
+execve("/usr/bin/git", ["git", "add", "file.txt"], 0x7fff5fbff5a8 /* 67 vars */) = 0
+brk(NULL)                               = 0x55555556a000
+access("/etc/ld.so.nohwcap", F_OK)     = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=111593, ...}) = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/var/opt/gitlab/git-data/repositories/group/project.git", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 4
+fstat(4, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+close(4)                                = 0
+stat("/var/opt/gitlab/git-data/repositories/group/project.git/.git", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+openat(AT_FDCWD, "/var/opt/gitlab/git-data/repositories/group/project.git/.git/config", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=1234, ...}) = 0
+read(4, "[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n\tbare = false\n\tlogallrefupdates = true\n", 1234) = 1234
+close(4)                                = 0
+openat(AT_FDCWD, "/var/opt/gitlab/git-data/repositories/group/project.git/.git/index", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=2048, ...}) = 0
+read(4, "DIRC\0\0\0\2\0\0\0\1abcdef1234567890abcdef1234567890abcdef12", 2048) = 2048
+close(4)                                = 0
+stat("/var/opt/gitlab/git-data/repositories/group/project.git/file.txt", {st_mode=S_IFREG|0644, st_size=123, ...}) = 0
+openat(AT_FDCWD, "/var/opt/gitlab/git-data/repositories/group/project.git/file.txt", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=123, ...}) = 0
+read(4, "This is a sample file\nfor testing purposes\n", 123) = 123
+close(4)                                = 0
+openat(AT_FDCWD, "/var/opt/gitlab/git-data/repositories/group/project.git/.git/objects/12/3456789abcdef", O_CREAT|O_WRONLY|O_EXCL, 0444) = 4
+write(4, "blob 43\0This is a sample file\nfor testing purposes\n", 51) = 51
+close(4)                                = 0
+chmod("/var/opt/gitlab/git-data/repositories/group/project.git/.git/objects/12/3456789abcdef", 0444) = 0
+openat(AT_FDCWD, "/var/opt/gitlab/git-data/repositories/group/project.git/.git/index.lock", O_CREAT|O_WRONLY|O_EXCL, 0666) = 4
+write(4, "DIRC\0\0\0\2\0\0\0\1abcdef1234567890abcdef1234567890abcdef12", 2048) = 2048
+close(4)                                = 0
+rename("/var/opt/gitlab/git-data/repositories/group/project.git/.git/index.lock", "/var/opt/gitlab/git-data/repositories/group/project.git/.git/index") = 0
+exit_group(0)                           = ?
++++ exited with 0 +++

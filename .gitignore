@@ -27,3 +27,5 @@
 # RSpec
 .rspec_status
 .DS_Store
+.claude/
+.claude/settings.local.json

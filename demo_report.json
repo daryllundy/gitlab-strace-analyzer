@@ -1,0 +1,97 @@
+{
+  "summary": {
+    "total_lines": 65,
+    "file_operations": 22,
+    "network_operations": 5,
+    "permission_denied": 1,
+    "network_timeouts": 2,
+    "gitlab_patterns": {
+      "postgres": 3,
+      "database_query": 1,
+      "redis": 1,
+      "git_repos": 2,
+      "logs": 1,
+      "unicorn": 1,
+      "sidekiq": 1,
+      "git_operations": 1,
+      "uploads": 1,
+      "config": 1,
+      "gitaly": 1
+    },
+    "performance_metrics": {
+      "slow_syscalls": 2,
+      "high_cpu_processes": [
+
+      ],
+      "memory_issues": 1,
+      "disk_io_heavy": 1,
+      "network_heavy": 1
+    }
+  },
+  "issues": [
+    {
+      "type": "heavy_disk_io",
+      "line_number": 17,
+      "line": "read(6, \"git_object_data\", 2097152) = 2097152",
+      "description": "Heavy disk I/O detected: 2097152 bytes"
+    },
+    {
+      "type": "slow_syscall",
+      "line_number": 21,
+      "line": "read(4, \"SELECT users.* FROM users JOIN projects...\", 1048576) = 1048576 <2.1>",
+      "description": "Slow syscall detected: read (2.1s)"
+    },
+    {
+      "type": "permission_denied",
+      "line_number": 24,
+      "line": "openat(AT_FDCWD, \"/var/opt/gitlab/git-data/repositories/restricted/secret.git\", O_RDONLY) = -1 EACCES (Permission denied)",
+      "description": "Permission denied"
+    },
+    {
+      "type": "heavy_network_io",
+      "line_number": 38,
+      "line": "send(8, \"large_git_push_data\", 5242880, 0) = 5242880",
+      "description": "Heavy network I/O detected: 5242880 bytes"
+    },
+    {
+      "type": "memory_issue",
+      "line_number": 41,
+      "line": "mmap(NULL, 2097152, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = -1 ENOMEM (Cannot allocate memory)",
+      "description": "Memory allocation issue detected"
+    },
+    {
+      "type": "network_timeout",
+      "line_number": 48,
+      "line": "connect(10, {sa_family=AF_INET, sin_port=htons(443)}, 16) = -1 ETIMEDOUT (Connection timed out)",
+      "description": "Network timeout detected"
+    },
+    {
+      "type": "frequent_failures",
+      "line_number": 51,
+      "line": "read(11, \"\", 1024) = -1 EBUSY (Device or resource busy)",
+      "description": "Frequent syscall failures detected - may indicate resource contention"
+    },
+    {
+      "type": "network_timeout",
+      "line_number": 52,
+      "line": "read(11, \"\", 1024) = -1 EAGAIN (Resource temporarily unavailable)",
+      "description": "Network timeout detected"
+    },
+    {
+      "type": "frequent_failures",
+      "line_number": 52,
+      "line": "read(11, \"\", 1024) = -1 EAGAIN (Resource temporarily unavailable)",
+      "description": "Frequent syscall failures detected - may indicate resource contention"
+    },
+    {
+      "type": "slow_syscall",
+      "line_number": 65,
+      "line": "read(14, \"metadata\", 4096) = 4096 <1.2>",
+      "description": "Slow syscall detected: read (1.2s)"
+    }
+  ],
+  "recommendations": [
+    "Memory allocation issues detected - check available memory and swap usage"
+  ],
+  "analysis_timestamp": "2025-07-03T20:11:16-07:00"
+}

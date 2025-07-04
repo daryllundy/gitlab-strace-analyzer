@@ -1,0 +1,65 @@
+# GitLab Comprehensive Strace Example
+# This example demonstrates various GitLab patterns and performance issues
+
+# PostgreSQL database activity
+open("/var/opt/gitlab/postgresql/data/base/16384/1249", O_RDWR) = 5
+read(5, "SELECT * FROM projects WHERE...", 8192) = 8192 <0.5>
+write(5, "INSERT INTO merge_requests...", 1024) = 1024
+close(5) = 0
+
+# Redis cache operations  
+connect(3, {sa_family=AF_UNIX, sun_path="/var/opt/gitlab/redis/redis.socket"}, 32) = 0
+send(3, "GET project:123:commits", 23, 0) = 23
+recv(3, "cached_commit_data", 1024, 0) = 1024
+
+# Git repository access
+open("/var/opt/gitlab/git-data/repositories/group/project.git/objects/ab/cd1234", O_RDONLY) = 6
+read(6, "git_object_data", 2097152) = 2097152
+close(6) = 0
+
+# Slow database query - performance issue
+read(4, "SELECT users.* FROM users JOIN projects...", 1048576) = 1048576 <2.1>
+
+# Permission denied error
+openat(AT_FDCWD, "/var/opt/gitlab/git-data/repositories/restricted/secret.git", O_RDONLY) = -1 EACCES (Permission denied)
+
+# GitLab application logs
+write(2, "ERROR: Failed to push to repository", 36) = 36
+open("/var/log/gitlab/gitlab-rails/application.log", O_WRONLY|O_APPEND) = 7
+write(7, "[ERROR] Repository push failed for user 123", 43) = 43
+
+# Unicorn worker process
+execve("/opt/gitlab/embedded/bin/unicorn", ["unicorn", "worker[0]"], []) = 0
+
+# Sidekiq background job processing
+execve("/opt/gitlab/embedded/bin/sidekiq", ["sidekiq", "worker"], []) = 0
+
+# Heavy network I/O
+send(8, "large_git_push_data", 5242880, 0) = 5242880
+
+# Memory allocation issue
+mmap(NULL, 2097152, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = -1 ENOMEM (Cannot allocate memory)
+
+# File uploads
+open("/var/opt/gitlab/gitlab-rails/uploads/user/avatar/123/image.jpg", O_RDWR|O_CREAT) = 9
+write(9, "image_data", 1048576) = 1048576
+
+# Network timeout
+connect(10, {sa_family=AF_INET, sin_port=htons(443)}, 16) = -1 ETIMEDOUT (Connection timed out)
+
+# Resource contention
+read(11, "", 1024) = -1 EBUSY (Device or resource busy)
+read(11, "", 1024) = -1 EAGAIN (Resource temporarily unavailable)
+
+# GitLab configuration access
+open("/etc/gitlab/gitlab.rb", O_RDONLY) = 12
+read(12, "external_url 'https://gitlab.example.com'", 41) = 41
+
+# Gitaly server activity
+execve("/opt/gitlab/embedded/bin/gitaly", ["gitaly", "server"], []) = 0
+
+# Additional PostgreSQL activity to trigger recommendations
+open("/var/opt/gitlab/postgresql/data/pg_wal/000000010000000000000001", O_RDWR) = 13
+write(13, "wal_data", 8192) = 8192
+open("/var/opt/gitlab/postgresql/data/base/16384/1259", O_RDWR) = 14
+read(14, "metadata", 4096) = 4096 <1.2>

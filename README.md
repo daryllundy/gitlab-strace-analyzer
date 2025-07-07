@@ -1,6 +1,16 @@
 # GitLab Strace Analyzer 🔍
 
+[![Ruby](https://img.shields.io/badge/ruby-%3E%3D%202.6-red.svg)](https://www.ruby-lang.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#testing)
+[![GitLab Mirror](https://img.shields.io/badge/gitlab-mirror-orange.svg)](#)
+[![GitHub Release](https://img.shields.io/github/v/release/daryllundy/gitlab-strace-analyzer.svg)](#)
+
 A Ruby CLI tool designed to parse and analyze strace output, specifically targeting common GitLab performance and debugging scenarios.
+
+## Why This Exists
+
+GitLab administrators and support engineers often need to analyze system call traces to diagnose performance issues, permission problems, and resource bottlenecks. This tool automates the tedious process of manually parsing strace output, providing GitLab-specific insights and actionable recommendations to accelerate troubleshooting workflows.
 
 ## Demo
 
@@ -239,4 +249,4 @@ When using `--format json`, the analyzer generates a structured JSON report:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
